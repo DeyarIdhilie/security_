@@ -33,13 +33,10 @@ public class SecurityHomework {
     }
     
     
-    public static void least_simple_substitution(String plain_text) {
- System.out.print("least_simple_substitution"+plain_text+"\n");
-    }
-    
     
     public static void main(String[] args) {
         RailFenceCipher rail_fence_cipher_obj = new RailFenceCipher();
+        LeastSimpleSubstitution least_simple_substitution_obj = new LeastSimpleSubstitution();
          while(true) {
             try {
 
@@ -47,7 +44,8 @@ public class SecurityHomework {
                 Scanner input_scanner = new Scanner(System.in);
 
                 int chosen_tech = input_scanner.nextInt();
-                if (chosen_tech == 1) {
+                if (chosen_tech == 1) 
+                {
                     char chosen_crypt = show_menu();
                     String text = read_user_text();
                     if (chosen_crypt == 'a'|| chosen_crypt == 'A')
@@ -59,12 +57,19 @@ public class SecurityHomework {
                     else
                         System.out.print("Not from the options");
 
-                } else if (chosen_tech == 2) {
+                } 
+                else if (chosen_tech == 2) 
+                {
                     char chosen_crypt = show_menu();
                     String plain_text = read_user_text();
-                    least_simple_substitution(plain_text);
-
-                } else {
+                    if (chosen_crypt == 'a'|| chosen_crypt == 'A')
+                        least_simple_substitution_obj.least_simple_substitution(plain_text);
+                    else if (chosen_crypt == 'b'|| chosen_crypt == 'B')
+                        least_simple_substitution_obj.least_simple_substitution_decrypt(plain_text);
+                    else if (chosen_crypt == 'c'|| chosen_crypt == 'C')
+                        least_simple_substitution_obj.find_frequency_of_letter_in_Text(plain_text);
+                }
+                else {
                     System.out.print("please choose a number from the menu");
                     System.out.print("\n");
                 }

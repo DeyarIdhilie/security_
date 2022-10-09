@@ -20,7 +20,14 @@ public class RailFenceCipher {
         Scanner rails_scanner = new Scanner(System.in);
         System.out.print("enter number of rails \n");
         int number_of_rails = rails_scanner.nextInt();
-        filling_the_fence_rails(number_of_rails,plain_text);
+        if(number_of_rails>0)
+        {
+            
+            filling_the_fence_rails(number_of_rails,plain_text);
+        }
+        else
+           System.out.print("rails must be a positive integer \n"); 
+       
         return;
     } 
    
@@ -101,8 +108,14 @@ public class RailFenceCipher {
          Scanner rails_scanner = new Scanner(System.in);
         System.out.print("enter number of rails \n");
         int number_of_rails = rails_scanner.nextInt();
-        marking_the_path(number_of_rails,cipher);
-//        ;
+        if(number_of_rails>0)
+        {
+            
+            marking_the_path(number_of_rails,cipher);
+        }
+        else
+           System.out.print("rails must be a positive integer \n"); 
+       
         return;
     }
      
