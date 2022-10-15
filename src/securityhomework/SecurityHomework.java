@@ -4,6 +4,7 @@
  */
 package securityhomework;
 import java.util.*;
+import static securityhomework.LeastSimpleSubstitution.create_letter_mapping;
 public class SecurityHomework {
     
     
@@ -60,6 +61,21 @@ public class SecurityHomework {
                 } 
                 else if (chosen_tech == 2) 
                 {
+                    System.out.print("choose key generation method:\n"
+                    + "1.let the program genrate an key\n"
+                    + "2.enter the key by yourself\n");
+                    Scanner choose_way = new Scanner(System.in);
+                    int generation_method = choose_way.nextInt();
+                    if (generation_method == 1)
+                    {
+                      create_letter_mapping();
+          
+                    }
+                    else if(generation_method == 2)
+                    {
+                      userKeyTable obj = new userKeyTable();
+                      obj.setVisible(true);
+                    }
                     char chosen_crypt = show_menu();
                     String plain_text = read_user_text();
                     if (chosen_crypt == 'a'|| chosen_crypt == 'A')
