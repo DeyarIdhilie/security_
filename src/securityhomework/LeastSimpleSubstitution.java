@@ -13,7 +13,12 @@ import java.util.Map.Entry;
 public class LeastSimpleSubstitution {
     public static Map<Character,Character> map_letter_to_cipher = new HashMap<>();
     public char[] letter_ordered_by_frequency_to_occure = {'e', 't', 'a', 'o', 'i', 'n', 's', 'r', 'h', 'd', 'l', 'u', 'c', 'm', 'f', 'y', 'w', 'g', 'p', 'b', 'v', 'k', 'x', 'q', 'j', 'z'};
+    public char[] letter_ordered_by_frequency_to_occure_2 = {'e', 't', 'a', 'o', 'i', 'n', 's', 'r', 'h', 'd', 'l', 'u', 'c', 'm', 'f', 'w', 'y', 'g', 'p', 'b', 'v', 'k', 'x', 'q', 'j', 'z'};
+    public char[] letter_ordered_by_frequency_to_occure_3 = {'e', 't', 'a', 'o', 'i', 'n', 's', 'r', 'h', 'd', 'l', 'u', 'c', 'm', 'f', 'y', 'w', 'g', 'p', 'b', 'v', 'k', 'x', 'j', 'q', 'z'};
+    public char[] letter_ordered_by_frequency_to_occure_4 = {'e', 't', 'a', 'o', 'i', 'n', 's', 'r', 'h', 'd', 'l', 'u', 'c', 'm', 'f', 'w', 'y', 'g', 'p', 'b', 'v', 'k', 'x', 'j', 'q', 'z'};
+   
     public static String text;
+    public static int flagg=0;
     public static void create_letter_mapping(){
           
                for (char ch = 'A'; ch <= 'Z'; ++ch) 
@@ -60,6 +65,36 @@ public class LeastSimpleSubstitution {
            System.out.print(Character.toUpperCase(map.get(text.charAt(t)))); 
         }
         System.out.print("\n");
+        i=0;
+        for(char c: sortedMap.keySet()){
+            map.put(c,letter_ordered_by_frequency_to_occure_2[i]);
+            i++;
+        }
+        System.out.print("The original text might be: \n");
+        for(int t=0; t<text.length();t++){
+           System.out.print(Character.toUpperCase(map.get(text.charAt(t)))); 
+        }
+        System.out.print("\n");
+        i=0;
+        for(char c: sortedMap.keySet()){
+            map.put(c,letter_ordered_by_frequency_to_occure_3[i]);
+            i++;
+        }
+        System.out.print("The original text might be: \n");
+        for(int t=0; t<text.length();t++){
+           System.out.print(Character.toUpperCase(map.get(text.charAt(t)))); 
+        }
+        System.out.print("\n");
+        i=0;
+        for(char c: sortedMap.keySet()){
+            map.put(c,letter_ordered_by_frequency_to_occure_4[i]);
+            i++;
+        }
+        System.out.print("The original text might be: \n");
+        for(int t=0; t<text.length();t++){
+           System.out.print(Character.toUpperCase(map.get(text.charAt(t)))); 
+        }
+        System.out.print("\n");
     }
     public void sort_the_ciphered_letters_by_frequency(Map<Character,Float>letters_map, String text){
         LinkedHashMap<Character,Float> sortedMap = new LinkedHashMap<>();
@@ -86,7 +121,7 @@ public class LeastSimpleSubstitution {
         figure_original_letter(sortedMap,text);
     }
     public void find_frequency_of_letter_in_Text(String text){
-         print_the_key_map();
+         
           Map<Character,Float> map_letters_to_occurence = new HashMap<>();
           for (char ch = 'a'; ch <= 'z'; ++ch) 
               map_letters_to_occurence.put(ch, 0.0f); 
@@ -112,7 +147,10 @@ public class LeastSimpleSubstitution {
        for (Character cha : map_letter_to_cipher.keySet()) {
               System.out.println( cha + " : " + map_letter_to_cipher.get(cha));
         }
-      
+       if(flagg==0)
+       print_the_cipher(text);
+       if(flagg==1)
+       print_the_plain(text);
        
     }
     public static void print_the_cipher(String text){
@@ -124,11 +162,20 @@ public class LeastSimpleSubstitution {
          System.out.print("\n");
     }
     
-    public void least_simple_substitution_decrypt(String text)
+    public void least_simple_substitution_decrypt(String cipher_text)
     {
-        print_the_key_map();
-        for(int cipher =0;cipher<text.length();cipher++)
-        {
+         text=cipher_text;
+         flagg=1;
+         System.out.print("enter the key: \n");
+         userKeyTable obj = new userKeyTable();
+         obj.setVisible(true);
+//         print_the_key_map();
+         
+        
+    }
+    public static void print_the_plain(String text){
+       for(int cipher =0;cipher<text.length();cipher++)
+         {
             for(Entry<Character,Character> entry: map_letter_to_cipher.entrySet())
             {
                    if(entry.getValue() == text.charAt(cipher)) 
@@ -137,15 +184,30 @@ public class LeastSimpleSubstitution {
                        break;
                    }
             }
-        }
-        System.out.print("\n");
-        
+         }
+         System.out.print("\n"); 
     }
     public  void least_simple_substitution(String plain_text) {
-//        System.out.print(plain_text +"\n");
-       text = plain_text;
-       print_the_key_map();
-       print_the_cipher(text);
+        flagg=0;
+         System.out.print("choose key generation method:\n"
+                    + "1.let the program genrate an key\n"
+                    + "2.enter the key by yourself\n");
+                    Scanner choose_way = new Scanner(System.in);
+                    int generation_method = choose_way.nextInt();
+                    if (generation_method == 1)
+                    {
+                      create_letter_mapping();
+                      text = plain_text;
+                      print_the_key_map();
+                      
+                    }
+                    else if(generation_method == 2)
+                    {
+                      userKeyTable obj = new userKeyTable();
+                      obj.setVisible(true);
+                    }
+      
+       
         
         
 

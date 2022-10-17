@@ -782,7 +782,9 @@ public class userKeyTable extends javax.swing.JFrame {
             LeastSimpleSubstitution.map_letter_to_cipher.put(ch, letter);
             i++;
         }
-        //LeastSimpleSubstitution.print_the_key_map();
+        LeastSimpleSubstitution.print_the_key_map();
+        
+        
         this.setVisible(false);
         }
         else if (flag ==1){
