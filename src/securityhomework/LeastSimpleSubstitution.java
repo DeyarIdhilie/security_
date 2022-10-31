@@ -5,6 +5,8 @@
 package securityhomework;
 import java.util.*;
 import java.util.Map.Entry;
+import java.awt.Desktop;  
+import java.io.*;  
 
 /**
  *
@@ -166,9 +168,52 @@ public class LeastSimpleSubstitution {
     {
          text=cipher_text;
          flagg=1;
-         System.out.print("enter the key: \n");
-         userKeyTable obj = new userKeyTable();
-         obj.setVisible(true);
+         System.out.print("How to enter the key: \n"
+                 + "1.enter the key by yourself \n"
+                 + "2.use file\n");
+          Scanner choose_way = new Scanner(System.in);
+                    int generation_method = choose_way.nextInt();
+                    if (generation_method == 1)
+                    {
+                        userKeyTable obj = new userKeyTable();
+                        obj.setVisible(true);
+                    }
+                    else if(generation_method == 2)
+                    {
+                      try  
+                        {  
+                            //constructor of file class having file as argument  
+                            File file=new File("C:\\demo\\demofile.txt");   
+                            FileInputStream fis=new FileInputStream(file);     //opens a connection to an actual file  
+                            System.out.println("file content: ");  
+                            int r=0;  
+                            int counter =0;
+                            char charLetter= ' ';
+                            while((r=fis.read())!=-1)  
+                            {  if(counter ==0){
+                                  
+                                charLetter= (char)r;
+                                counter++;
+                               }
+                               else if(counter==1){
+                                  
+                                  map_letter_to_cipher.put(charLetter,(char)r);
+                                  counter++;  
+                               }
+                               else if(counter==2){
+                                 
+                                  counter=0;  
+                               }
+                            
+                            }  
+                            
+                            print_the_key_map();
+                        }  
+                      catch(Exception e)  
+                        {  
+                            e.printStackTrace();  
+                        }  
+                    }  
 //         print_the_key_map();
          
         
@@ -187,11 +232,13 @@ public class LeastSimpleSubstitution {
          }
          System.out.print("\n"); 
     }
-    public  void least_simple_substitution(String plain_text) {
-        flagg=0;
+    public void least_simple_substitution(String plain_text) 
+    {
+         flagg=0;
          System.out.print("choose key generation method:\n"
                     + "1.let the program genrate an key\n"
-                    + "2.enter the key by yourself\n");
+                    + "2.enter the key by yourself\n"
+                    +"3.read the key from a file\n");
                     Scanner choose_way = new Scanner(System.in);
                     int generation_method = choose_way.nextInt();
                     if (generation_method == 1)
@@ -206,6 +253,43 @@ public class LeastSimpleSubstitution {
                       userKeyTable obj = new userKeyTable();
                       obj.setVisible(true);
                     }
+                    else if(generation_method == 3)
+                    {
+                      try  
+                        {  
+                            //constructor of file class having file as argument  
+                            File file=new File("C:\\demo\\demofile.txt");   
+                            FileInputStream fis=new FileInputStream(file);     //opens a connection to an actual file  
+                            System.out.println("file content: ");  
+                            int r=0;  
+                            int counter =0;
+                            char charLetter= ' ';
+                            while((r=fis.read())!=-1)  
+                            {  if(counter ==0){
+                                  
+                                charLetter= (char)r;
+                                counter++;
+                               }
+                               else if(counter==1){
+                                  
+                                  map_letter_to_cipher.put(charLetter,(char)r);
+                                  counter++;  
+                               }
+                               else if(counter==2){
+                                 
+                                  counter=0;  
+                               }
+                            
+                            }  
+                            text = plain_text;
+                            print_the_key_map();
+                        }  
+                      catch(Exception e)  
+                        {  
+                            e.printStackTrace();  
+                        }  
+                    }  
+    }
       
        
         
@@ -214,4 +298,4 @@ public class LeastSimpleSubstitution {
 
 
     }
-}
+
